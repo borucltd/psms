@@ -1,0 +1,27 @@
+{
+  "name": "peculiar-soundtrack-mood-saver",
+  "version": "1.0.0",
+  "description": "app to lets user save songs depends on daily mood based on Spotify",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/borucltd/psms.git"
+  },
+  "author": "peculiarpigeons",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/borucltd/psms/issues"
+  },
+  "homepage": "https://github.com/borucltd/psms#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.4",
+    "mysql": "^2.18.1",
+    "sequelize": "^5.21.11",
+    "sequelize-cli": "^5.5.1"
+  }
+}
