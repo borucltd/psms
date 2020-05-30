@@ -31,13 +31,13 @@ passport.deserializeUser(function(obj, done) {
 //   Strategies in Passport require a `verify` function, which accept
 //   credentials (in this case, an accessToken, refreshToken, expires_in
 //   and spotify profile), and invoke a callback with a user object.
-// http://localhost:8888/callback
+// 
 passport.use(
   new SpotifyStrategy(
     {
       clientID: appKey,
       clientSecret: appSecret,
-      callbackURL: 'https://nameless-dawn-40326.herokuapp.com/callback'
+      callbackURL: 'https://sleepy-citadel-76926.herokuapp.com/callback'
     },
     function(accessToken, refreshToken, expires_in, profile, done) {
       // asynchronous verification, for effect...
