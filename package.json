@@ -2,7 +2,7 @@
   "name": "passport-spotify-examples-login",
   "version": "0.0.1",
   "scripts": {
-    "start": "node app.js",
+    "start": "node app.js"
   },
   "dependencies": {
     "consolidate": "~0.10.0",
