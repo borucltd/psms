@@ -58,6 +58,8 @@ function Strategy(options, verify) {
   this._userProfileURL =
     options.userProfileURL || 'https://api.spotify.com/v1/me';
 
+  
+
   this._oauth2.getOAuthAccessToken = function(code, params, callback) {
     params = params || {};
     var codeParam =
