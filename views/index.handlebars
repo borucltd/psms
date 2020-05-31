@@ -1,0 +1,16 @@
+
+{{#unless user.username}}
+    <h2>Welcome! Please log in.</h2>
+    <form action="/login" method="GET">
+        <button type=submit>LOGIN</button>
+    </form>
+{{else}}
+    <h2>Hello, {{ user.username }}.</h2>
+
+    <form action="/account" method="GET">
+        <button type=submit>HOME</button>
+    </form>
+     <form action="/logout" method="GET">
+        <button type=submit>LOGOUT</button>
+    </form>
+{{/unless}}

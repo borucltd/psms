@@ -1,12 +1,15 @@
 const express = require('express')
 const session = require('express-session')
 const passport = require('passport')
+const exphbs = require('express-handlebars')
 const consolidate = require('consolidate')
 const swig = require('swig')
 
 // import configuration function for passport (it contains predefined strategy for Spotify)
 const initializePassport = require('./config/passport-config')
 initializePassport(passport);
+
+
 
 // defaults for express
 const PORT = process.env.PORT || 8888
@@ -16,8 +19,9 @@ const sessionSecret = process.env.SESSION_SECRET || 'whatever'
 const app = express()
 
 // configure express
-app.set('view engine','ejs')          // engine template ejs
-app.engine('html', consolidate.swig) // define to render files with extenstion html, 
+app.engine('handlebars',exphbs({defaultLayout: "main"}))
+app.set('view engine','handlebars')
+
 app.use(session({               
   secret: sessionSecret,          // each session will be secured with secret, it should be random string
   resave: true,                   // should be false not sure yet
