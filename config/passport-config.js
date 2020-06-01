@@ -4,6 +4,8 @@ const appKey = process.env.APP_KEY ||  '55e1da0fb3c74763b46c5507b68d4ca4'
 const appSecret = process.env.APP_SECRET  || 'ce948c0683054e3e8ae9dbb7603f68c9'
 const appCallback = process.env.APP_CALLBACK || 'http://localhost:8888/callback'
 const spotifyScope = ["user-read-private", "user-read-email", "playlist-read-private"]
+const fs = require('fs')
+
 
 let access_token ;
                
@@ -24,7 +26,12 @@ function initialize(passport) {
         },
         function(accessToken, refreshToken, expires_in, profile, done) {
             console.log(accessToken);
-            // asynchronous verification, for effect...
+            fs.writeFileSync("./tokens.log", JSON.stringify(accessToken), (err) => {
+                if (err) throw err;
+                console.log("token saved");
+
+            } )
+            // asynchronous verification, f 
             process.nextTick(function() {
             // To keep the example simple, the user's spotify profile is returned to
             // represent the logged-in user. In a typical application, you would want

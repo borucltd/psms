@@ -2,6 +2,7 @@
 const express = require('express')
 const passport = require('passport')
 const request = require('request')
+const fs = require('fs')
 
 let token = {}
 let user_id = "1alqsafoulc65iwhu1a1taal2"
@@ -49,8 +50,15 @@ router.get('/callback',
 router.get('/playlists',   (req,res) => {
 
     // access token
-    console.log(passport.access_token);
+    const raw_access_token = fs.readFileSync("./tokens.log")
+    const access_token = JSON.parse(raw_access_token);
     
+    request({url: playlistUrl, headers:{"Authorization": "Bearer " + access_token}}, (err,res) => {
+
+
+        console.log(JSON.parse(res.body));
+    })
+  
 
 
 
