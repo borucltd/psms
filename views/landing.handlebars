@@ -1,0 +1,51 @@
+
+<p>ID: {{ user.id }} </p>
+<p>Username (display name): {{ user.displayName }} </p>
+<p>Followers: {{ user.followers }}</p>
+<p>Email: {{ user._json.email }} </p>
+{{#if  user.photos  }}
+<img src={{ user.photos }}>
+{{else}}
+<p> Yo have no image - shame :)</p>>
+{{/if}}
+
+<p>Profile: <a href=" {{ user.profileUrl }}">{{ user.profileUrl }}</a></p>
+<p>Country: <img src="https://www.countryflags.io/{{ user.country }}/shiny/64.png"> </p>
+
+
+{{#if playlists}}
+<form method="get" action="/spotify/search_tracks">      
+    <fieldset>      
+        <legend>Make your selection:</legend>  
+        {{#each playlists}}
+            {{> spotify_playlists-block }}
+        {{/each}}       
+        <br>      
+        <input type="submit" value="Search the tracks" />      
+    </fieldset>      
+</form>
+{{/if}}
+
+
+{{#if spotify_tracks}}
+<form method="post" action="/spotify/save_tracks">      
+    <fieldset>      
+        <legend>Make your selection:</legend>  
+        {{#each spotify_tracks}}
+            {{> spotify_tracks-block }}
+        {{/each}}       
+        <br>      
+        <input type="submit" value="Add tracks to the playlist" />      
+    </fieldset>      
+</form>
+{{/if}}
+
+<form action="/local/display_playlists" method="GET">
+    <button type=submit>Display internal playlist</button>
+</form>
+<form action="/spotify/search_playlists" method="GET">
+    <button type=submit>Display Spotify playlists</button>
+</form>
+<form action="/logout" method="GET">
+        <button type=submit>Logout</button>
+</form>

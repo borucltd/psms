@@ -35,15 +35,16 @@ router.get('/', function(req, res) {
     res.render('index',  { user: req.user });
   });
   
-router.get('/account', ensureAuthenticated, function(req, res) {
-    res.render('account', { user: req.user });
+router.get('/landing', ensureAuthenticated, function(req, res) {
+  console.log(req.user);
+    res.render('landing', { user: req.user });
 });
 
 router.get('/login', function(req, res) {
     res.render('login', { user: req.user });
 });
 
-router.get('/local/login', function(req, res) {
+router.get('/local/login',  function(req, res) {
   res.render('./local_auth/locallogin', { user: req.user });
 });
 
