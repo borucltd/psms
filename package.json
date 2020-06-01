@@ -11,7 +11,6 @@
     "express-handlebars": "^4.0.4",
     "express-session": "^1.17.1",
     "html": "^1.0.0",
-    "mysql": "^2.18.1",
     "passport": "^0.4.1",
     "passport-oauth": "^1.0.0",
     "passport-spotify": "^1.1.0",

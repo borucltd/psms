@@ -5,12 +5,11 @@ const exphbs = require('express-handlebars')
 const consolidate = require('consolidate')
 const swig = require('swig')
 
-// Requiring our models for syncing
-const db = require("./models");
-
 // import configuration function for passport (it contains predefined strategy for Spotify)
 const initializePassport = require('./config/passport-config')
 initializePassport(passport);
+
+
 
 // defaults for express
 const PORT = process.env.PORT || 8888
@@ -37,10 +36,7 @@ const routes = require("./controllers/routes");
 app.use(spotify_routes);
 app.use(routes);
 
-// Syncing our sequelize models and then starting our Express app
-// =============================================================
-db.sequelize.sync({ force: true }).then(function() {
-  app.listen(PORT, function() {
-    console.log("App listening on PORT " + PORT);
-  });
-});
+// start express
+app.listen(PORT,  function() {
+  console.log("Server listening on port " + PORT)
+})
