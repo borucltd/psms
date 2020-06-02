@@ -36,7 +36,6 @@ router.get('/', function(req, res) {
   });
   
 router.get('/landing', ensureAuthenticated, function(req, res) {
-  console.log(req.user);
     res.render('landing', { user: req.user });
 });
 
@@ -57,5 +56,4 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
 });
   
-
 module.exports = router

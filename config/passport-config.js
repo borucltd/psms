@@ -25,12 +25,23 @@ function initialize(passport) {
             callbackURL: appCallback
         },
         function(accessToken, refreshToken, expires_in, profile, done) {
-            console.log(accessToken);
+            console.log("==============> FILE ./config/passport-config.js")
+            console.log("Check if there is user in the table with spotify id and spotify username")
+            console.log("is user exists, we need to run SQL UPDATE and replace access and refresh token")
+            console.log("if user doesn't exist we need run SQL RUN into database")
+            console.log("Work with table users:")
+            console.log("spotify_id" + profile.id)
+            console.log("spotify_username" + profile.displayName)
+            console.log("access_token" + accessToken)
+            console.log("refresh_roken" + refreshToken)
+            
             fs.writeFileSync("./tokens.log", JSON.stringify(accessToken), (err) => {
                 if (err) throw err;
                 console.log("token saved");
 
             } )
+            console.log("==============> FILE ./config/passport-config.js")
+
             // asynchronous verification, f 
             process.nextTick(function() {
             // To keep the example simple, the user's spotify profile is returned to
