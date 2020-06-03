@@ -163,21 +163,34 @@ router.get('/spotify/search_tracks',   async (req,res) => {
 // display playlist from database
 router.get('/local/display_playlists',   async (req,res) => {
 
-    console.log("START: READ from database here => file ./controllers/spotify.js")
-    console.log("We need to get all tracks for the user SQL SELECT and .. INNER JOIN")
-    console.log("Use user spotify id" + user_id + "global variable ready to be used")
-    console.log("Tracks need to in JSON format, each track: title and artist")
-    console.log("END: READ from database here => file ./controllers/spotify.js")
-    tracks = [ 
-            {
-                "title":"Battery",
-                "artist":"Metallica"
-            }, 
-            {
-                "title":"Teardrop",
-                "artist":"Jose Gonzalez"
-            } 
-        ]
+    // console.log("START: READ from database here => file ./controllers/spotify.js")
+    // console.log("We need to get all tracks for the user SQL SELECT and .. INNER JOIN")
+    // console.log("Use user spotify id" + user_id + "global variable ready to be used")
+    // console.log("Tracks need to in JSON format, each track: title and artist")
+    // console.log("END: READ from database here => file ./controllers/spotify.js")
+    // tracks = [ 
+    //         {
+    //             "title":"Battery",
+    //             "artist":"Metallica"
+    //         }, 
+    //         {
+    //             "title":"Teardrop",
+    //             "artist":"Jose Gonzalez"
+    //         } 
+    //     ]
+    // SQL select to find trac
+   
+    const existingTracks = await db.User.findOne({where: {spotifyId: req.user.id},include: db.Song })
+    const tracks = []
+    existingTracks.dataValues.Songs.forEach(element => {
+        
+        let obj = {
+            title: element.title,
+            artist: element.artistName
+        }
+        tracks.push(obj)
+    });
+    
     res.render('landing', { user: req.user, localdb_tracks:  tracks });
 });
 
@@ -191,6 +204,14 @@ router.post('/local/display_playlists',   async (req,res) => {
     console.log("writing to databse")
     res.status(200)
 });
+
+router.post('/spotify/save_tracks', async (req,res) => {
+
+
+
+
+})
+
 
 
 // function which selects random elements from the array
