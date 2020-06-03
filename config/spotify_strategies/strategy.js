@@ -51,7 +51,11 @@ function Strategy(options, verify) {
     options.authorizationURL || 'https://accounts.spotify.com/authorize';
   options.tokenURL =
     options.tokenURL || 'https://accounts.spotify.com/api/token';
+    options.scope = 
   options.scopeSeparator = options.scopeSeparator || ' ';
+
+    console.log( options.scope)
+  
 
   OAuth2Strategy.call(this, options, verify);
   this.name = 'spotify';

@@ -32,8 +32,8 @@ function ensureAuthenticated(req, res, next) {
 // here we add more routes..
 
 router.get('/', function(req, res) {  
-    res.render('index',  { user: req.user });
-  });
+    res.render('login',  { user: req.user });
+  }); 
   
 router.get('/landing', ensureAuthenticated, function(req, res) {
     res.render('landing', { user: req.user });
@@ -41,14 +41,6 @@ router.get('/landing', ensureAuthenticated, function(req, res) {
 
 router.get('/login', function(req, res) {
     res.render('login', { user: req.user });
-});
-
-router.get('/local/login',  function(req, res) {
-  res.render('./local_auth/locallogin', { user: req.user });
-});
-
-router.get('/local/register', function(req, res) {
-  res.render('./local_auth/localregister', { user: req.user });
 });
 
 router.get('/logout', function(req, res) {

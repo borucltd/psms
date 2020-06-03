@@ -3,7 +3,7 @@ const SpotifyStrategy = require('./spotify_strategies/index').Strategy;
 const appKey = process.env.APP_KEY ||  '55e1da0fb3c74763b46c5507b68d4ca4'
 const appSecret = process.env.APP_SECRET  || 'ce948c0683054e3e8ae9dbb7603f68c9'
 const appCallback = process.env.APP_CALLBACK || 'http://localhost:8888/callback'
-const spotifyScope = ["user-read-private", "user-read-email", "playlist-read-private"]
+const spotifyScope = ["user-read-private", "user-read-email", "playlist-read-private","playlist-modify-private", "playlist-modify-public" ]
 const fs = require('fs')
 const db = require('../models')
 
@@ -23,7 +23,8 @@ function initialize(passport) {
         {
             clientID: appKey,
             clientSecret: appSecret,
-            callbackURL: appCallback
+            callbackURL: appCallback,
+            scope: spotifyScope
         },
         async function(accessToken, refreshToken, expires_in, profile, done) {
             
@@ -67,12 +68,12 @@ function initialize(passport) {
             // console.log("access_token" + accessToken)
             // console.log("refresh_roken" + refreshToken)
             
-            fs.writeFileSync("./tokens.log", JSON.stringify(accessToken), (err) => {
-                if (err) throw err;
-                console.log("token saved");
+            // fs.writeFileSync("./tokens.log", JSON.stringify(accessToken), (err) => {
+            //     if (err) throw err;
+            //     console.log("token saved");
 
-            } )
-            console.log("==============> FILE ./config/passport-config.js")
+            // } )
+            // console.log("==============> FILE ./config/passport-config.js")
 
             // asynchronous verification, f 
             process.nextTick(function() {

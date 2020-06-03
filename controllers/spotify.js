@@ -195,14 +195,46 @@ router.get('/local/display_playlists',   async (req,res) => {
 });
 
 
-
+// adds songs to local database
 router.post('/spotify/save_tracks', async (req,res) => {
 
+    console.log(req.body)
     console.log(req.body.track)
 
+})
 
+
+// creates playlist in spotify
+router.get('/spotify/sync', async (req,res) => {
+
+
+    const user_id = req.user.id
+    let spotify_playlist_url = `https://api.spotify.com/v1/users/${user_id}/playlists`  
+
+    // SQL select to find accessToken
+    const existingUser = await db.User.findOne({where: {spotifyId: req.user.id}})
+    const access_token = existingUser.accessToken
+    // axios returns a promise
+    await axios({
+        method: 'post',
+        url: spotify_playlist_url,
+        headers: {"Authorization": "Bearer " + access_token},
+        data: { name: "moodA",
+                public: "false"
+            }
+    })
+    .then(response => {
+       console.log("OK")
+    })
+    .catch(error => console.log('Error', error.response.data))
+
+    console.log(spotify_playlist_url)
 
 })
+
+
+
+
 
 
 
