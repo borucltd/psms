@@ -5,6 +5,7 @@ const appSecret = process.env.APP_SECRET  || 'ce948c0683054e3e8ae9dbb7603f68c9'
 const appCallback = process.env.APP_CALLBACK || 'http://localhost:8888/callback'
 const spotifyScope = ["user-read-private", "user-read-email", "playlist-read-private"]
 const fs = require('fs')
+const db = require('../models')
 
 
 let access_token ;
@@ -24,16 +25,47 @@ function initialize(passport) {
             clientSecret: appSecret,
             callbackURL: appCallback
         },
-        function(accessToken, refreshToken, expires_in, profile, done) {
-            console.log("==============> FILE ./config/passport-config.js")
-            console.log("Check if there is user in the table with spotify id and spotify username")
-            console.log("is user exists, we need to run SQL UPDATE and replace access and refresh token")
-            console.log("if user doesn't exist we need run SQL RUN into database")
-            console.log("Work with table users:")
-            console.log("spotify_id" + profile.id)
-            console.log("spotify_username" + profile.displayName)
-            console.log("access_token" + accessToken)
-            console.log("refresh_roken" + refreshToken)
+        async function(accessToken, refreshToken, expires_in, profile, done) {
+            
+        // SQL select token
+        const existingUser = await db.User.findOne({where: {spotifyId: profile.id}})
+        if (existingUser == null) {
+            // SQL insert tokens
+            db.User.create({
+                spotifyId: profile.id,
+                username: profile.displayName,
+                accessToken: accessToken,
+                refreshToken: refreshToken
+            })
+            .then(function(user) {
+
+                  console.log(user);
+
+            });
+
+        } else {
+
+            // SQL update tokens
+            db.User.update({ 
+                accessToken: accessToken,
+                refreshToken: refreshToken
+                }, 
+                {
+                where: {
+                    spotifyId: profile.id
+                }
+            });
+        }         
+            
+            // console.log("==============> FILE ./config/passport-config.js")
+            // console.log("Check if there is user in the table with spotify id and spotify username")
+            // console.log("is user exists, we need to run SQL UPDATE and replace access and refresh token")
+            // console.log("if user doesn't exist we need run SQL RUN into database")
+            // console.log("Work with table users:")
+            // console.log("spotify_id" + profile.id)
+            // console.log("spotify_username" + profile.displayName)
+            // console.log("access_token" + accessToken)
+            // console.log("refresh_roken" + refreshToken)
             
             fs.writeFileSync("./tokens.log", JSON.stringify(accessToken), (err) => {
                 if (err) throw err;

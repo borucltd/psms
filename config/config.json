@@ -1,9 +1,9 @@
 {
     "development": {
-      "username": "root",
-      "password": null,
-      "database": "spotify_db",
-      "host": "127.0.0.1",
+      "username": "hktk1uzd48wwcpxd",
+      "password": "mfdlzo1jc1hz2ptd",
+      "database": "szeie52gyv1mo2r3",
+      "host": "sq65ur5a5bj7flas.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
       "port": 3306,
       "dialect": "mysql"
     },

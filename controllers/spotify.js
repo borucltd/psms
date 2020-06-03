@@ -4,6 +4,7 @@ const passport = require('passport')
 const request = require('request')
 const axios = require('axios')
 const fs = require('fs')
+const db = require('../models')
 
 // this is important
 // access_token is SPECIFIC to the scopes below
@@ -58,12 +59,18 @@ router.get('/spotify/search_playlists',  async (req,res) => {
     // read access token from the database
     const category_id = "mood"
     const spotify_category_playlists = `https://api.spotify.com/v1/browse/categories/${category_id}/playlists`
-    console.log("START: READ from database here => file ./controllers/spotify.js")
-    console.log("We need to get access_token using SQL SELECT")
-    console.log("Spotify ID:" + req.user.id) 
-    console.log("END: READ from database here => file ./controllers/spotify.js")
-    const raw_access_token = fs.readFileSync("./tokens.log")
-    const access_token = JSON.parse(raw_access_token);
+
+    // console.log("START: READ from database here => file ./controllers/spotify.js")
+    // console.log("We need to get access_token using SQL SELECT")
+    // console.log("Spotify ID:" + req.user.id) 
+    // console.log("END: READ from database here => file ./controllers/spotify.js")
+    // const raw_access_token = fs.readFileSync("./tokens.log")  
+    //const access_token = JSON.parse(raw_access_token);
+    
+    // SQL select to find accessToken
+    const existingUser = await db.User.findOne({where: {spotifyId: req.user.id}})
+    const access_token = existingUser.accessToken
+
     // axios returns a promise
     axios({
         method: 'get',
@@ -93,14 +100,19 @@ router.get('/spotify/search_tracks',   async (req,res) => {
 
     // GET https://api.spotify.com/v1/playlists/{playlist_id}/tracks
     // read access token from the database
-    console.log(`HEEEEEEEEEEEEEERE ${req.user.id}`)
-    const playlistUrl = `https://api.spotify.com/v1/users/${req.user.id}/playlists/`
-    console.log("START: READ from database here => file ./controllers/spotify.js")
-    console.log("We need to get access_token using SQL SELECT")
-    console.log("Spotify ID:" + req.user.id) 
-    console.log("END: READ from database here => file ./controllers/spotify.js")
-    const raw_access_token = fs.readFileSync("./tokens.log")
-    const access_token = JSON.parse(raw_access_token);
+    // console.log(`HEEEEEEEEEEEEEERE ${req.user.id}`)
+    // const playlistUrl = `https://api.spotify.com/v1/users/${req.user.id}/playlists/`
+    // console.log("START: READ from database here => file ./controllers/spotify.js")
+    // console.log("We need to get access_token using SQL SELECT")
+    // console.log("Spotify ID:" + req.user.id) 
+    // console.log("END: READ from database here => file ./controllers/spotify.js")
+    // const raw_access_token = fs.readFileSync("./tokens.log")
+    // const access_token = JSON.parse(raw_access_token);
+
+    // SQL select to find accessToken
+    const existingUser = await db.User.findOne({where: {spotifyId: req.user.id}})
+    const access_token = existingUser.accessToken
+
     const playlists_ids = req.query.playlist;
 
     // if nothing was selected
