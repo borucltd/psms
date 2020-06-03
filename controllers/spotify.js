@@ -194,19 +194,11 @@ router.get('/local/display_playlists',   async (req,res) => {
     res.render('landing', { user: req.user, localdb_tracks:  tracks });
 });
 
-// save OR update database with new songs
-router.post('/local/display_playlists',   async (req,res) => {
-    console.log("START: READ from database here => file ./controllers/spotify.js")
-    console.log("We need to get access_token using SQL SELECT")
-    console.log("Spotify ID:" + req.user.id) 
-    console.log("END: READ from database here => file ./controllers/spotify.js")
 
-    console.log("writing to databse")
-    res.status(200)
-});
 
 router.post('/spotify/save_tracks', async (req,res) => {
 
+    console.log(req.body.track)
 
 
 

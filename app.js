@@ -23,6 +23,9 @@ const app = express()
 app.engine('handlebars',exphbs({defaultLayout: "main"}))
 app.set('view engine','handlebars')
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(session({               
   secret: sessionSecret,          // each session will be secured with secret, it should be random string
   resave: true,                   // should be false not sure yet
