@@ -34,15 +34,16 @@
             </fieldset>      
       </form>
       {{/if}}
+      
       {{#if spotify_tracks}}
-      <form method="post" action="/spotify/save_tracks">      
+      <form>      
         <fieldset>      
           <legend>Tracks:</legend>  
             {{#each spotify_tracks}}
             {{> spotify_tracks-block }}
             {{/each}}       
             <br>      
-            <input type="submit" value="Add tracks to the playlist" />      
+            <button class="submitToDatabase" type="submit">Add tracks to the playlist.</button>     
         </fieldset>      
       </form>
       {{/if}}
@@ -67,7 +68,7 @@
         </ul>   
         <br>    
         <br>      
-        <button class="submitToDatabase" type="submit" value="Save to your Spotify"/>           
+        <button class="submit" type="submit"/>"Save to your Spotify"</button>           
     </fieldset>      
 </form>
 {{/if}}

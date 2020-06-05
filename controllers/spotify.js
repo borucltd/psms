@@ -198,8 +198,22 @@ router.get('/local/display_playlists',   async (req,res) => {
 // adds songs to local database
 router.post('/spotify/save_tracks', async (req,res) => {
 
-    console.log(req.body)
-    console.log(req.body.track)
+    // first we need to collect user database ID
+    const response = await db.User.findOne({where: {spotifyId: req.user.id}})
+    const user_id = response.id
+    console.log(user_id)
+   
+    // SQL inserts to find accessToken
+    for (key in req.body.titles) {
+        let confirmation =  await db.Song.create({ title: req.body.titles[key], artistName: req.body.artists[key] })
+        // now we need to update another table UserSongs
+        // song id confirmation.id
+        // user id 
+        await db.UserSong.create({ SongId: confirmation.id, UserId: user_id })
+        
+    }
+    // here we need to change some rendering
+    res.status(201)
 
 })
 

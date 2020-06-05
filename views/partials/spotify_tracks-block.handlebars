@@ -1,5 +1,5 @@
 <div>
-    <input type="checkbox" name="track" value={{ track.id }} class="saveToDatabase"> {{ track.name }} ({{ track.album.artists.[0].name }})
+    <input type="checkbox" name="track" value={{ track.id }} class="saveToDatabase"><span class="{{ track.id }}_title">{{ track.name }}</span> <span class="{{ track.id }}_artist">({{ track.album.artists.[0].name }})</span> 
     <img src={{ track.album.images.[0].url }} width=64 height=64 >
     <br>      
 </div>

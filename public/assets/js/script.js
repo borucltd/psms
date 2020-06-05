@@ -1,34 +1,38 @@
 $(function() {
 
-    // make request to backend
-    $(".login").on("click", function(event) {
+    
+  // request to backend
+  // save spotify tracks to local database
+  // selector for button
+  $(".submitToDatabase").on("click", function(event) {
 
-        $.ajax("/authorize_spotify", {
-            type: "GET",
-          }).then(
-            function(result) {
-                console.log(result);
-            }
-          );
-  
-    });
+    // stop default action
+    event.preventDefault()
 
+    // select all checkboxes
+    let tracks = $(".saveToDatabase")
+    let prefix
+    let titles = []
+    let artists = []
 
-    $(".submitToDatabase").on("click", function(event) {
-
-      console.log('HEERE')
-      let tracks = $(".saveToDatabase").val()
-
-      console.log(tracks)
-      $.ajax("/spotify/save_tracks", {
-          type: "POST",
-
-        }).then(
-          function(result) {
-              console.log("Saved to DB");
-          }
-        );
-
-  });
+    // collect title and artist
+    for (item of tracks) {
+      if (item.checked === true) {
+        prefix = item.value
+        titles.push($("."+prefix+"_title").text());
+        artists.push($("."+prefix+"_artist").text().replace(/\(|\)/g,""));    
+      }
+    };
+    
+    $.ajax({
+      method: "POST",
+      url: "/spotify/save_tracks",
+      data: { titles: titles, artists: artists }
+    })
+      .done(function( msg ) {
+        alert( "Data Saved: " + msg );
+      });
+    
 });
+})
   
