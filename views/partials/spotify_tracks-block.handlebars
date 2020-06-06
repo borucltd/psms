@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row spotify-track-list">
+        <div class="col-md-3 col-sm-6 col-6">
+            <img class="track-cover" src={{ track.album.images.[0].url }}>
+            </br> {{ track.name }} 
+            </br>{{ track.album.artists.[0].name }}
+            </br>
+            <input class="check-box" type="checkbox" name="track" value={{ track.id }} class="saveToDatabase">
+    
+        </div>
+           <div class="col-md-3 col-sm-6 col-6 selection-box">
+            <img class="track-cover" src={{ track.album.images.[0].url }}>
+            </br> {{ track.name }} 
+            </br>{{ track.album.artists.[0].name }}
+            </br>
+            <input class="check-box" type="checkbox" name="track" value={{ track.id }} class="saveToDatabase">
+    
+        </div>
+             <div class="col-md-3 col-sm-6 col-6 selection-box">
+            <img class="track-cover" src={{ track.album.images.[0].url }}>
+            </br> {{ track.name }} 
+            </br>{{ track.album.artists.[0].name }}
+            </br>
+            <input class="check-box" type="checkbox" name="track" value={{ track.id }} class="saveToDatabase">
+    
+        </div>
+      <div class="col-md-3 col-sm-6 col-6 selection-box">
+            <img class="track-cover" src={{ track.album.images.[0].url }}>
+            </br> {{ track.name }} 
+            </br>{{ track.album.artists.[0].name }}
+            </br>
+            <input class="check-box" type="checkbox" name="track" value={{ track.id }} class="saveToDatabase">
+    
+        </div>
+    </div>
+    {{!-- <input type="checkbox" name="track" value={{ track.id }} class="saveToDatabase"> {{ track.name }} ({{ track.album.artists.[0].name }})
+    <img src={{ track.album.images.[0].url }} width=64 height=64 >
+    <br>       --}}
+</div>

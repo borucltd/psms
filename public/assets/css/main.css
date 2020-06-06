@@ -1,0 +1,135 @@
+.navbar {
+    background-color:#0205FC;
+}
+
+.navbar-toggler {
+    /* background-color:#F6E1E5; */
+}
+
+a {
+    color:#F6E1E5;    
+}
+
+a:hover {
+    color:#F6E1E5;
+    text-decoration: none;
+}
+
+.btn-nav{
+    color: #0205FC;
+    margin: 0 10px 0 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 2rem;
+    background-color: #FCC5E5;
+    border-color: #FCC5E5;
+    border-style: solid;
+    border-color: #FCC5E5;
+    border-width: medium;
+  }
+
+  .btn-nav:hover {
+    margin: 0 10px 0 10px;
+    color: #0205FC;
+    font-size: 0.7rem;
+    letter-spacing: 0.05rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 2rem;
+    background-color: #FCC5E5;
+    border-color:#F3F923;
+  }
+
+  .bkg-col {
+    background-color: #F6E1E5;
+}
+
+.btn-main{
+    color: #F6E1E5;
+    margin: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 2rem;
+    background-color: #0205FC;
+    border-color: #0205FC;
+    border-style: solid;
+    border-color: #0205FC;
+    border-width: medium;
+  }
+
+  .btn-main:hover {
+    margin: 10px;
+    color: #F6E1E5;
+    color: #F3F923;
+    font-size: 0.9rem;
+    letter-spacing: 0.05rem;
+    padding: 0.5rem 0.5rem;
+    border-radius: 2rem;
+    background-color: #0205FC;
+    border-color:#F3F923;
+  }
+
+  .user-image-nav {
+      height: 25px;
+      border-radius: 50%;
+      box-shadow: 0px 0px 10px grey;
+  }
+
+  .user-image {
+    height: 175px;
+    border-radius: 50%;
+    margin: 55px 0 25px 0;
+    box-shadow: 0px 0px 10px grey;
+  }
+
+  .user-header {
+    font-family: 'Inconsolata', monospace;
+    padding: 25px;
+  }
+
+  .profile-details {
+    font-family: 'Inconsolata', monospace;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  /* TRACKS LISTING STYLES */
+
+.check-box {
+    margin-top: 15px 0 20px 0;
+}
+  .spotify-track-list {
+    margin-top: 25px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    /* margin: 25px 0 25px 0; */
+  }
+
+  /* .selection-box {
+        background-color: rgba(128, 128, 128, 0.26);
+        padding: 20px 0 20px 0;
+        border-radius: 15px;
+        margin: 0 5px 0 5px;
+        width: 100%;
+  } */
+
+  .track-cover {
+
+    height: 125px;
+    margin-bottom: 15px;
+    box-shadow: 0px 0px 10px grey;
+    border-radius: 15px;
+  }
+  /* media queries */
+
+  @media (min-width: 768px)
+.col-md-3 {
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+}
