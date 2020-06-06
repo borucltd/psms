@@ -23,6 +23,9 @@ $(function() {
         artists.push($("."+prefix+"_artist").text().replace(/\(|\)/g,""));    
       }
     };
+
+
+    console.log(titles)
     
     $.ajax({
       method: "POST",
