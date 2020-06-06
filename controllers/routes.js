@@ -39,6 +39,10 @@ router.get('/landing', ensureAuthenticated, function(req, res) {
     res.render('landing', { user: req.user });
 });
 
+router.get('/playlists', ensureAuthenticated, function(req, res) {
+  res.render('playlists', { user: req.user });
+});
+
 router.get('/login', function(req, res) {
     res.render('login', { user: req.user });
 });
