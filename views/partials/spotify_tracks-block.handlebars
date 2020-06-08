@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <div class="row spotify-track-list">
+        <div class="col-md-3 col-sm-6 col-6">
+            <img class="track-cover" src={{ track.album.images.[0].url }}>
+            <input type="checkbox" name="track" value={{ track.id }} class="saveToDatabase">
+            <br><span class="{{ track.id }}_title">{{ track.name }}</span>
+            <br><span class="{{ track.id }}_artist">({{ track.album.artists.[0].name }})</span> 
+       </div>
+    </div>
+</div>
+
+
+
+
