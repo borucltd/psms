@@ -14,23 +14,24 @@ $(function() {
     let prefix
     let titles = []
     let artists = []
-
+    let trackIds = []
     // collect title and artist
     for (item of tracks) {
       if (item.checked === true) {
         prefix = item.value
+        trackIds.push(prefix);
         titles.push($("."+prefix+"_title").text());
         artists.push($("."+prefix+"_artist").text().replace(/\(|\)/g,""));    
       }
     };
 
-
-    console.log(titles)
+    console.log(ids);
+   console.log(titles)
     
     $.ajax({
       method: "POST",
       url: "/spotify/save_tracks",
-      data: { titles: titles, artists: artists }
+      data: { trackIds: trackIds, titles: titles, artists: artists }
     })
       .done(function( msg ) {
         alert( "Data Saved: " + msg );

@@ -8,7 +8,7 @@ const db = require('../models')
 
 // this is important
 // access_token is SPECIFIC to the scopes below
-const spotifyScope = ["user-read-private", "user-read-email", "playlist-read-private"]
+const spotifyScope = ["user-read-private", "user-read-email", "playlist-read-private", "playlist-modify-private"]
 // this variable will be updated when callback redirections happens
 // next it will be used to make queries with DB
 let user_id
@@ -205,7 +205,7 @@ router.post('/spotify/save_tracks', async (req,res) => {
    
     // SQL inserts to find accessToken
     for (key in req.body.titles) {
-        let confirmation =  await db.Song.create({ title: req.body.titles[key], artistName: req.body.artists[key] })
+        let confirmation =  await db.Song.create({ spotifyId: req.body.spotifyIds[key], title: req.body.titles[key], artistName: req.body.artists[key] })
         // now we need to update another table UserSongs
         // song id confirmation.id
         // user id 
@@ -233,7 +233,7 @@ router.get('/spotify/sync', async (req,res) => {
         method: 'post',
         url: spotify_playlist_url,
         headers: {"Authorization": "Bearer " + access_token},
-        data: { name: "moodA",
+        data: { name: "Peculiar Playlist",
                 public: "false"
             }
     })
