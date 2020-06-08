@@ -205,7 +205,7 @@ router.post('/spotify/save_tracks', async (req,res) => {
    
     // SQL inserts to find accessToken
     for (key in req.body.titles) {
-        let confirmation =  await db.Song.create({ spotifyId: req.body.spotifyIds[key], title: req.body.titles[key], artistName: req.body.artists[key] })
+        let confirmation =  await db.Song.create({ trackId: req.body.trackIds[key], title: req.body.titles[key], artistName: req.body.artists[key] })
         // now we need to update another table UserSongs
         // song id confirmation.id
         // user id 
