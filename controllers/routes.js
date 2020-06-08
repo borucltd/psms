@@ -55,6 +55,10 @@ router.get('/journal', ensureAuthenticated, function(req, res) {
   res.render('journal', { user: req.user });
 });
 
+router.get('/journal-post', ensureAuthenticated, function(req, res) {
+  res.render('journal-post', { user: req.user });
+});
+
 router.get('/index', ensureAuthenticated, function(req, res) {
   res.render('index', { user: req.user });
 });
