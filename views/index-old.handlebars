@@ -1,0 +1,37 @@
+
+{{#unless user.username}}
+
+
+  <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Welcome, Please Login!</div>
+      <div class="card-body">
+        <form>
+        {{#unless user.username}}
+    <form action="/login" method="GET">
+        <button type=submit>LOGIN</button>
+    </form>
+{{else}}
+    <h2>Hello, {{ user.username }}.</h2>
+
+    <form action="/landing" method="GET">
+        <button type=submit>HOME</button>
+    </form>
+     <form action="/logout" method="GET">
+        <button type=submit>LOGOUT</button>
+    </form>
+{{/unless}}
+      </div>
+    </div>
+  </div>
+
+{{else}}
+    <h2>Hello, {{ user.username }}.</h2>
+
+    <form action="/landing" method="GET">
+        <button type=submit>HOME</button>
+    </form>
+     <form action="/logout" method="GET">
+        <button type=submit>LOGOUT</button>
+    </form>
+{{/unless}}

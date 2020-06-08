@@ -1,0 +1,237 @@
+
+{{> home/home-nav}}
+
+<body class="bkg-col">
+  <!-- Page Content -->
+  <div class="container container-fluid profile-main-header">
+    <div class="row">
+      <div class="col-md-12 col-12 d-flex justify-content-center">
+        <div class="profile-header mt-4">Welcome, {{ user.displayName }}</div>
+      </div>
+      <div class="col-md-12 col-12 d-flex justify-content-center">
+        <p class="profile-header-text">Get ready to create the soundtrack to you life!</p>
+      </div>
+    </div>
+  </div>
+
+ <!-- user profile display -->
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-center">
+      {{#if  user.photos  }}
+      <img class="user-image" src={{ user.photos }}>
+      {{else}}
+      <p> You have no image - shame :)</p>>
+      {{/if}}
+      </div>
+      <div class="col-md-12 d-flex justify-content-center">
+        <h2 class="user-header">{{ user.id }}, {{ user.country }} </h2>
+      </div>
+      <div class="col-md-12 col-12">
+          <p class="profile-details"><i class="fas fa-at app-icon-main"></i>Contact Me</p>
+      </div>
+      <div class="col-md-12 col-12">
+          <p class="profile-details">{{ user._json.email }} </p>
+        </div>
+      <div class="col-md-12 d-flex justify-content-center">
+        <button class="btn-main"><a href=" {{ user.profileUrl }}" target="_blank"><i class="fab fa-spotify app-icon-nav"></i> View Spotify Profile</a></button>
+      </div>
+      <div class="col-md-4 col-4">
+        <p class="profile-details"><i class="fas fa-users app-icon-main"></i> Followers</p>
+      </div>
+        <div class="col-md-4 col-4">
+          <p class="profile-details"><i class="far fa-play-circle app-icon-main"></i>Playlists </p>
+        </div>
+      <div class="col-md-4 col-4">
+        <p class="profile-details">Country </p>
+      </div>
+      <div class="col-md-4 col-4">
+        <p class="profile-details">{{ user.followers }}</p>
+      </div>
+        <div class="col-md-4 col-4">
+          <p class="profile-details">{{ user._json.email }} </p>
+        </div>
+      <div class="col-md-4 col-4">
+        <p class="profile-details">{{ user.country }} </p>
+      </div>
+
+      
+      </div>
+      </div>
+    </div>
+
+{{!-- Profile main body --}}
+<div class="container">
+<div class="card-columns">
+  <div class="card">
+    <img src="/assets/img/2.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">My Graduation Soundtrack</h5>
+      <p class="card-text">After 4 long years, I finally graduated from Uni with a CS degree. This is how graduation feels!!</p>
+    </div>
+  </div>
+  <div class="card p-3">
+    <blockquote class="blockquote mb-0 card-body">
+      <p class="">"What if I wanted to break,
+Laugh it all off in your face,
+What would you do?
+What if I fell to the floor,
+Couldn't take all this anymore,
+What would you do, do, do?"</p>
+      <footer class="blockquote-footer">
+        <small class="text-muted lyric-quote">
+          The Kill, by <a class="lyric-link" href="https://open.spotify.com/track/0lP4HYLmvowOKdsQ7CVkuq" target="_blank">30 Seconds to Mars</a>
+        </small>
+      </footer>
+    </blockquote>
+  </div>
+  <div class="card">
+    <img src="/assets/img/4.png" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">School Formal Vibes</h5>
+      <p class="card-text">HIgh school was a mixed bag. These track lyrics perfectly express how I feel at this tipping point of young adulthood.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div>
+  <div class="card text-center p-3">
+    <blockquote class="blockquote mb-0">
+      <p>"Oh, dear diary, I met a boy
+He made my doll heart light up with joy
+Oh, dear diary, we fell apart
+Welcome to the life of Electra Heart"</p>
+      <footer class="blockquote-footer text-white">
+        <small>
+          Bubblegum B*tch by<a class="lyric-link" href="https://open.spotify.com/track/6IbnUaczZBT34DhaD6S18F" target="_blank">Marina & The Diamonds</a>
+        </small>
+      </footer>
+    </blockquote>
+  </div>
+  
+  <div class="card">
+    <img src="/assets/img/3.png" class="card-img-top" alt="...">
+  </div>
+  <div class="card p-3 text-center">
+    <blockquote class="blockquote mb-0">
+      <p>"They keep saying...
+Don’t stop, no one’s ever enough
+I’ll never look back, never give up
+And if it gets rough, it’s time to get rough
+Oh, but now I'm Falling”</p>
+      <footer class="blockquote-footer">
+        <small class="text-muted">
+          Falling by <a class="lyric-link" href="https://open.spotify.com/track/2AZe0ej4oy1qIjbjfwhphQ" target="_blank">HAIM</a>
+        </small>
+      </footer>
+    </blockquote>
+  </div>
+</div>
+</div>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-12">
+          {{#if playlists}}
+
+            <form method="get" action="/spotify/search_tracks">      
+              <fieldset class="col-md-12 text-center">      
+                <legend class="playlist-header">Spotify Playlists:</legend> 
+
+                <p class="playlist-details">please select which playlist best represents your current state</p>
+                <div class="container-fluid">
+                  <div class="row spotify-track-list">
+                      {{#each playlists}}
+                    {{> spotify_playlists-block }}
+                  {{/each}}  
+                     {{/if}}
+                  </div>
+                </div>
+                     
+                  <br>      
+                  <button class="btn-main" type="submit">Search Playlists</button>      
+              </fieldset>      
+            </form> 
+       
+        </div>
+        <div class="col-md-12 col-12">
+      {{#if spotify_tracks}}
+
+      <form method="post" action="/spotify/save_tracks">   
+        <fieldset class="col-md-12 text-center">      
+          <legend class="playlist-header">Tracks:</legend>
+
+            <p class="playlist-details">select your playlist tracks</p> 
+            <div class="container-fluid">
+            <div class="row spotify-track-list">
+              {{#each spotify_tracks}}
+              {{> spotify_tracks-block }}
+                  {{/each}}  
+            </div>
+
+<div class="row">
+  <div class="col-md-12 text-center">
+<button class="submitToDatabase btn-main" type="submit" value="Add tracks to the playlist">Add tracks to Playlist</button> 
+            {{!-- <input type="submit" value="Add tracks to the playlist" />       --}}
+            <button class="submitToDatabase btn-main" type="submit" value="Save to your Spotify">Save Playlist to Spotify Account</button> 
+  </div>
+
+
+</div>
+</div>
+
+   
+            
+            
+            
+
+        </fieldset>      
+      </form>
+      {{/if}}
+        </div>
+      </div>
+    </div>
+
+
+{{#if message }}
+<form method="post" action="/spotify/save_tracks">      
+    <fieldset>      
+        <p>{{ message }}</p>  
+        <br>         
+    </fieldset>      
+</form>
+{{/if}}
+
+      {{#if localdb_tracks }}
+      <form method="get" action="/spotify/sync">      
+        <fieldset>      
+          <legend>My tracks:</legend>  
+            <ul class="w3-ul ">
+              {{#each localdb_tracks}}
+              {{> localdb_tracks-block }}
+              {{/each}}    
+            </ul>      
+    </fieldset>        
+</form>
+{{/if}}  
+
+      
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+  <form action="/local/display_playlists" method="GET">
+    <button class="btn-main" type=submit>My Playlists</button>
+</form>
+<form action="/spotify/search_playlists" method="GET">
+    <button class="btn-main" type=submit>Create Playlist</button>
+</form>
+</div>
+  </div>
+</div>
+
+{{> home/footer}}
+
+</body>
+
+
