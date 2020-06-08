@@ -22,12 +22,15 @@
  h5,
  h6 {
    font-family: 'Inconsolata', monospace;
-   font-weight: 200;
+   font-weight: 400;
    letter-spacing: 1px;
+   line-height: 75px;
+   margin-bottom: 45px;
  }
  
  p {
    font-size: 18px;
+   font-family: 'Montserrat', sans-serif;
    line-height: 1.5;
    margin-bottom: 20px;
  }
@@ -148,8 +151,10 @@
  
  header.masthead .device-container .screen img {
    border-radius: 3px;
- }
+   margin-left: 25px;
+  }
  
+
  @media (min-width: 992px) {
    header.masthead {
      height: 100vh;
@@ -157,6 +162,8 @@
      padding-top: 0;
      padding-bottom: 0;
    }
+
+
    header.masthead .header-content {
      margin-bottom: 0;
      text-align: left;
@@ -254,10 +261,12 @@
  
  section.cta {
    position: relative;
+   height: 100%;
    padding: 250px 0;
-   background-image: url("../img/bg-cta.jpg");
+   background-image: url("/assets/img/PPMS-Hero.jpg");
    background-position: center;
    background-size: cover;
+   
  }
  
  section.cta .cta-content {
@@ -285,7 +294,7 @@
    left: 0;
    width: 100%;
    height: 100%;
-   background-color: rgba(0, 0, 0, 0.5);
+   background-color:rgba(2, 6, 252, 0.219);
  }
  
  section.contact {
@@ -315,30 +324,6 @@
    border-radius: 100%;
  }
  
- section.contact ul.list-social li.social-twitter a {
-   background-color: #1da1f2;
- }
- 
- section.contact ul.list-social li.social-twitter a:hover {
-   background-color: #0d95e8;
- }
- 
- section.contact ul.list-social li.social-facebook a {
-   background-color: #3b5998;
- }
- 
- section.contact ul.list-social li.social-facebook a:hover {
-   background-color: #344e86;
- }
- 
- section.contact ul.list-social li.social-google-plus a {
-   background-color: #dd4b39;
- }
- 
- section.contact ul.list-social li.social-google-plus a:hover {
-   background-color: #d73925;
- }
- 
  footer {
    padding: 25px 0;
    text-align: center;
@@ -364,10 +349,10 @@
    text-decoration: none;
  }
  
- /* .bg-primary {
-   background: #fdcc52;
-   background: linear-gradient(#fdcc52, #fdc539);
- } */
+ .bg-primary {
+   background-color: #F26A2D !important;
+
+ }
  
  .text-primary {
    color: #fdcc52;
@@ -396,3 +381,66 @@
    padding: 15px 45px;
  }
  
+ /* pricing table */
+
+ section.pricing {
+  background-color: #F6E1E5;
+}
+
+.pricing .card {
+  border: none;
+  border-radius: .5rem;
+  transition: all 0.2s;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.pricing hr {
+  margin: 1.5rem 0;
+}
+
+.pricing .card-title {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+}
+
+.pricing .card-price {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.pricing .card-price .period {
+  font-size: 0.8rem;
+}
+
+.pricing ul li {
+  margin-bottom: 1rem;
+}
+
+.pricing .text-muted {
+  opacity: 0.7;
+}
+
+.pricing .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+/* Hover Effects on Card */
+
+@media (min-width: 992px) {
+  .pricing .card:hover {
+    margin-top: -.25rem;
+    margin-bottom: .25rem;
+    box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.3);
+  }
+  .pricing .card:hover .btn {
+    opacity: 1;
+  }
+}
