@@ -84,6 +84,9 @@ router.get('/spotify/search_playlists',  async (req,res) => {
         // remove duplicates if any
         const unique_random_playlists = [... new Set(random_playlists)]
         // redner the landing page with user and playlist data
+        console.log(unique_random_playlists[0].images[0].url)
+
+
         res.render('playlists', { user: req.user, playlists: unique_random_playlists  });
         
     })
@@ -198,8 +201,28 @@ router.get('/local/display_playlists',   async (req,res) => {
 // adds songs to local database
 router.post('/spotify/save_tracks', async (req,res) => {
 
-    console.log(req.body)
-    console.log(req.body.track)
+    // console.log(req.body)
+    // console.log(req.body.track)
+
+    // first we need to collect user database ID
+    const response = await db.User.findOne({where: {spotifyId: req.user.id}})
+    const user_id = response.id  
+   
+    // SQL inserts to find accessToken
+    for (key in req.body.titles) {
+        let confirmation =  await db.Song.create({ title: req.body.titles[key], artistName: req.body.artists[key] })
+        //alert("Songs added")
+        // now we need to update another table UserSongs
+        // song id confirmation.id
+        // user id 
+        await db.UserSong.create({ SongId: confirmation.id, UserId: user_id })
+        
+    }
+    // here we need to change some rendering
+    //res.status(201).sen
+    //res.render('landing',{ message: "Songs were added to the database"})
+    res.render('login', { user: req.user });
+    
 
 })
 
