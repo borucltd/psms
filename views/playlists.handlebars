@@ -16,7 +16,7 @@
 {{> home/playlist-header}}
     <div class="container">
       <div class="row">
-        <div class="col-md-12 col-12">
+        <div class="col-md-12 col-12 text-center">
           {{#if playlists}}
             <form method="get" action="/spotify/search_tracks">      
               <fieldset class="col-md-12 text-center">      
@@ -25,17 +25,21 @@
                 <div class="container-fluid">
                   <div class="row spotify-track-list">
                       {{#each playlists}}
-                    {{> spotify_playlists-block }}
-                  {{/each}}  
-                     {{/if}}
+                        {{> spotify_playlists-block }}
+                      {{/each}}  
+                     
                   </div>
-                </div>
-                  <button class="btn-main" type="submit">Search Playlists</button>      
-              </fieldset>      
+                </div>   
+              </fieldset>  
+              <button class="btn-main" type="submit">Search Playlists</button>      
             </form> 
-       
+            
+          {{/if}}
         </div>
-        <div class="col-md-12 col-12">
+      </div>
+    </div>
+    
+    <div class="col-md-12 col-12">
       {{#if spotify_tracks}}
 
       <form method="post" action="/spotify/save_tracks">   
@@ -51,10 +55,8 @@
             </div>
 
 <div class="row">
-  <div class="col-md-12 text-center">
-<button class="submitToDatabase btn-main" type="submit" value="Add tracks to the playlist">Add tracks to Playlist</button> 
-            {{!-- <input type="submit" value="Add tracks to the playlist" />       --}}
-     <button class="submitToDatabase btn-main" type="submit" value="Save to your Spotify">Save Playlist to Spotify Account</button> 
+  <div class="col-md-12 text-center">   
+    <button class="submitToDatabase btn-main" type="submit" value="Add tracks to the playlist">Add tracks to Playlist</button>  
   </div>
 
 

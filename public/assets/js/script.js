@@ -15,7 +15,6 @@ $(function() {
 
     $(".submitToDatabase").on("click", function(event) {
 
-
       // stop default action
       event.preventDefault()
       // select all checkboxes
@@ -42,39 +41,39 @@ $(function() {
           location.replace("/local/display_playlists");
        
         });
-  });
+      });
+
+
+      $(".submitToSpotifytabase").on("click", function(event) {
+
+        // stop default action
+        event.preventDefault()
+        // select all checkboxes
+        let tracks = $(".saveToSpotify")
+        let prefix
+        let titles = []
+        let artists = []
+        // collect title and artist
+        for (item of tracks) {
+          if (item.checked === true) {
+            prefix = item.value
+            titles.push($("."+prefix+"_title").text());
+            artists.push($("."+prefix+"_artist").text().replace(/\(|\)/g,""));    
+          }
+        };
+        //console.log(ids);
+       console.log(titles)
+        $.ajax({
+          method: "GET",
+          url: "/spotify/sync",
+          data: { titles: titles, artists: artists }
+        })
+          .done(function( msg ) {
+            location.replace("/local/display_playlists");
+          });
+        });
+  
 
 
 
 });
-
-// search bar - artist search  
-
-// find template and compile it
-// var templateSource = document.getElementById('results-template').innerHTML,
-//   template = Handlebars.compile(templateSource),
-//   resultsPlaceholder = document.getElementById('results'),
-//   playingCssClass = 'playing',
-//   audioObject = null;
-
-// var fetchTracks = function(albumId, callback) {
-//   $.ajax({
-//     url: 'https://api.spotify.com/v1/albums/' + albumId,
-//     success: function(response) {
-//       callback(response);
-//     }
-//   });
-// };
-
-// var searchAlbums = function(query) {
-//   $.ajax({
-//     url: 'https://api.spotify.com/v1/search',
-//     data: {
-//       q: query,
-//       type: 'album'
-//     },
-//     success: function(response) {
-//       resultsPlaceholder.innerHTML = template(response);
-//     }
-//   });
-// };

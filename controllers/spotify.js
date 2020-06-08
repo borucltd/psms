@@ -8,7 +8,7 @@ const db = require('../models')
 
 // this is important
 // access_token is SPECIFIC to the scopes below
-const spotifyScope = ["user-read-private", "user-read-email", "playlist-read-private"]
+const spotifyScope = ["user-read-private", "user-read-email", "playlist-read-private", "playlist-modify-private", "playlist-modify-public" ]
 // this variable will be updated when callback redirections happens
 // next it will be used to make queries with DB
 let user_id
@@ -59,13 +59,6 @@ router.get('/spotify/search_playlists',  async (req,res) => {
     // read access token from the database
     const category_id = "mood"
     const spotify_category_playlists = `https://api.spotify.com/v1/browse/categories/${category_id}/playlists`
-
-    // console.log("START: READ from database here => file ./controllers/spotify.js")
-    // console.log("We need to get access_token using SQL SELECT")
-    // console.log("Spotify ID:" + req.user.id) 
-    // console.log("END: READ from database here => file ./controllers/spotify.js")
-    // const raw_access_token = fs.readFileSync("./tokens.log")  
-    //const access_token = JSON.parse(raw_access_token);
     
     // SQL select to find accessToken
     const existingUser = await db.User.findOne({where: {spotifyId: req.user.id}})
@@ -103,14 +96,6 @@ router.get('/spotify/search_tracks',   async (req,res) => {
 
     // GET https://api.spotify.com/v1/playlists/{playlist_id}/tracks
     // read access token from the database
-    // console.log(`HEEEEEEEEEEEEEERE ${req.user.id}`)
-    // const playlistUrl = `https://api.spotify.com/v1/users/${req.user.id}/playlists/`
-    // console.log("START: READ from database here => file ./controllers/spotify.js")
-    // console.log("We need to get access_token using SQL SELECT")
-    // console.log("Spotify ID:" + req.user.id) 
-    // console.log("END: READ from database here => file ./controllers/spotify.js")
-    // const raw_access_token = fs.readFileSync("./tokens.log")
-    // const access_token = JSON.parse(raw_access_token);
 
     // SQL select to find accessToken
     const existingUser = await db.User.findOne({where: {spotifyId: req.user.id}})
@@ -127,15 +112,12 @@ router.get('/spotify/search_tracks',   async (req,res) => {
 
         // if user selected some playslists
         // pick up IDs
-        const playlists_ids = req.query.playlist;
-
-        const tracks = []
-
-        for (playlist_id of playlists_ids) {
-
-            console.log(playlist_id)
-
-            let spotify_tracks_url = `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`           
+        // if one playlist is selected
+        if (typeof req.query.playlist === "string") {
+         
+            // if many playlists are selected  
+            const tracks = [] 
+            let spotify_tracks_url = `https://api.spotify.com/v1/playlists/${req.query.playlist}/tracks`           
             // axios returns a promise
             await axios({
                 method: 'get',
@@ -156,32 +138,49 @@ router.get('/spotify/search_tracks',   async (req,res) => {
                 // console.log(JSON.parse(response.data.items))
             })
             .catch(error => console.log('Error', error.response.data))
-        } 
-        // render page with tracks 
-        //console.log(tracks)  
-        res.render('playlists', { user: req.user, spotify_tracks:  tracks });
-        } 
+             
+            // render page with tracks 
+            //console.log(tracks)  
+            res.render('playlists', { user: req.user, spotify_tracks:  tracks });
+
+        } else {   
+            // if many playlists are selected
+            const playlists_ids = req.query.playlist;      
+            const tracks = []
+            for (playlist_id of playlists_ids) {
+
+
+                let spotify_tracks_url = `https://api.spotify.com/v1/playlists/${playlist_id}/tracks`           
+                // axios returns a promise
+                await axios({
+                    method: 'get',
+                    url: spotify_tracks_url,
+                    headers: {"Authorization": "Bearer " + access_token},
+                    params: { limit: 10}
+                })
+                .then(response => {
+                    const random_tracks = randomizeArray(response.data.items,10)
+                    const unique_random_playlists = [... new Set(random_tracks)]
+                    const unique_random_tracks = [... new Set(unique_random_playlists)]
+                    // collect tracks data only
+                    for (value of unique_random_tracks ) {
+                        //console.log(value.artists)
+                        tracks.push(value)
+                    }
+                
+                    // console.log(JSON.parse(response.data.items))
+                })
+                .catch(error => console.log('Error', error.response.data))
+            } 
+            // render page with tracks 
+            //console.log(tracks)  
+            res.render('playlists', { user: req.user, spotify_tracks:  tracks });
+            } 
+        }
 });
 
 // display playlist from database
 router.get('/local/display_playlists',   async (req,res) => {
-
-    // console.log("START: READ from database here => file ./controllers/spotify.js")
-    // console.log("We need to get all tracks for the user SQL SELECT and .. INNER JOIN")
-    // console.log("Use user spotify id" + user_id + "global variable ready to be used")
-    // console.log("Tracks need to in JSON format, each track: title and artist")
-    // console.log("END: READ from database here => file ./controllers/spotify.js")
-    // tracks = [ 
-    //         {
-    //             "title":"Battery",
-    //             "artist":"Metallica"
-    //         }, 
-    //         {
-    //             "title":"Teardrop",
-    //             "artist":"Jose Gonzalez"
-    //         } 
-    //     ]
-    // SQL select to find trac
    
     const existingTracks = await db.User.findOne({where: {spotifyId: req.user.id},include: db.Song })
     const tracks = []
@@ -230,7 +229,7 @@ router.post('/spotify/save_tracks', async (req,res) => {
 // creates playlist in spotify
 router.get('/spotify/sync', async (req,res) => {
 
-
+    console.log(req.query)
     const user_id = req.user.id
     let spotify_playlist_url = `https://api.spotify.com/v1/users/${user_id}/playlists`  
 
@@ -242,23 +241,22 @@ router.get('/spotify/sync', async (req,res) => {
         method: 'post',
         url: spotify_playlist_url,
         headers: {"Authorization": "Bearer " + access_token},
-        data: { name: "moodA",
+        data: { name: "mood",
                 public: "false"
             }
     })
     .then(response => {
-       console.log("OK")
+       console.log("Adding tracks to Spotify playlist:")
+        
+
+
+
     })
     .catch(error => console.log('Error', error.response.data))
 
     console.log(spotify_playlist_url)
 
 })
-
-
-
-
-
 
 
 // function which selects random elements from the array
