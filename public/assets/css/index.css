@@ -327,8 +327,8 @@
  footer {
    padding: 25px 0;
    text-align: center;
-   color: rgba(255, 255, 255, 0.3);
-   background-color: #222222;
+   color: #F6E1E5;
+   background-color: #0205FC;
  }
  
  footer p {
@@ -342,7 +342,7 @@
  
  footer ul li a {
    font-size: 12px;
-   color: rgba(255, 255, 255, 0.3);
+   color: #F6E1E5;
  }
  
  footer ul li a:hover, footer ul li a:focus, footer ul li a:active, footer ul li a.active {
