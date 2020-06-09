@@ -6,18 +6,24 @@
   <!-- Page Content -->
   <div class="container">
     <div class="row">
-      <div class="col-md-12 col-12 d-flex justify-content-center">
+      <div class="col-md-12 col-sm-12 col-12 d-flex justify-content-center">
         <h1 class="mt-4 playlist-header">hey, {{ user.displayName }}</h1>
       </div>
-      <div class="col-md-12 col-12 d-flex justify-content-center">
-        <p>welcome to the soundtecks to your life.</p>
+      <div class="col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+        <h3>ready to add tracks to the soundtrack of your life?</h3>
+      </div>
+      <div class="col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+        <h3>here are your current soundtracks.</h3>
+      </div>
+      <div class="col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+        <p>click to read journal entry and play tracks.</p>
       </div>
     </div>
   </div>
 {{> home/my-playlists-header}}
     <div class="container">
       <div class="row">
-        <div class="col-md-12 col-12">
+        <div class="col-md-12 col-sm-12 col-12">
           {{#if playlists}}
             <form method="get" action="/spotify/search_tracks">      
               <fieldset class="col-md-12 text-center">      
@@ -59,12 +65,6 @@
 
 </div>
 </div>
-
-   
-            
-            
-            
-
         </fieldset>      
       </form>
       {{/if}}
@@ -84,8 +84,8 @@
 
 {{#if localdb_tracks }}
 <form method="get" action="/spotify/sync">      
-  <fieldset>      
-    <legend>My tracks:</legend>  
+  <fieldset class="col-md-12 text-center">      
+    <legend class="playlist-header">My tracks:</legend>  
       <ul class="w3-ul ">
         {{#each localdb_tracks}}
         {{> localdb_tracks-block }}

@@ -11,26 +11,26 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/landing"><i class="fas fa-home app-icon-nav"></i> Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/journal"><i class="fas fa-headphones app-icon-nav"></i> Journal
-            </a>
-          </li>
-          {{!-- <li class="nav-item active">
-            <a class="nav-link" href="#">
-              <span class="sr-only">(current)</span>
-            </a>
-          </li> --}}
           <li class="nav-item">
-              <a class="nav-link" href="/my-playlists"><i class="far fa-play-circle app-icon-nav"></i>My Playlists</a>
+            <button class="btn-main nav-link" href="/landing"><i class="fas fa-home app-icon-nav"></i> Home
+              <span class="sr-only">(current)</span>
+            </button>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="/playlists"><i class="fab fa-spotify app-icon-nav"></i>Create Playlist</a>
-
+            <button class="btn-main nav-link" href="/journal"><i class="fas fa-headphones app-icon-nav"></i> Journal
+            </button>
+          </li>
+          <li class="nav-item">
+              <form action="/local/display_playlists" method="GET">
+                <button class="btn-main nav-link" type=submit><i class="far fa-play-circle app-icon-nav"></i>My Playlists</button>
+              </form>
+              {{!-- <a class="nav-link" href="/my-playlists"><i class="far fa-play-circle app-icon-nav"></i>My Playlists</a> --}}
+          </li>
+          <li class="nav-item">
+            <form action="/spotify/search_playlists" method="GET">
+              <button class="btn-main nav-link" type=submit><i class="fab fa-spotify app-icon-nav"></i>Create Playlist</button>
+            </form>
+              {{!-- <a class="nav-link" href="/playlists"><i class="fab fa-spotify app-icon-nav"></i>Create Playlist</a> --}}
           </li>
         </ul>
       </div>
