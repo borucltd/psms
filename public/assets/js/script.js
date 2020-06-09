@@ -22,20 +22,23 @@ $(function() {
       let prefix
       let titles = []
       let artists = []
+      let uris = []
       // collect title and artist
       for (item of tracks) {
         if (item.checked === true) {
-          prefix = item.value
+          prefix = item.value;
           titles.push($("."+prefix+"_title").text());
           artists.push($("."+prefix+"_artist").text().replace(/\(|\)/g,""));    
+          uris.push(item.name);
         }
       };
       //console.log(ids);
+      console.log(uris)
      console.log(titles)
       $.ajax({
         method: "POST",
         url: "/spotify/save_tracks",
-        data: { titles: titles, artists: artists }
+        data: { titles: titles, artists: artists, uris: uris }
       })
         .done(function( msg ) {
           location.replace("/local/display_playlists");
@@ -44,32 +47,29 @@ $(function() {
       });
 
 
-      $(".submitToSpotifytabase").on("click", function(event) {
+      $(".submitToSpotify").on("click", function(event) {
 
         // stop default action
         event.preventDefault()
         // select all checkboxes
         let tracks = $(".saveToSpotify")
         let prefix
-        let titles = []
-        let artists = []
-        // collect title and artist
+        let uris = []
+        // collect uri for each track
         for (item of tracks) {
           if (item.checked === true) {
-            prefix = item.value
-            titles.push($("."+prefix+"_title").text());
-            artists.push($("."+prefix+"_artist").text().replace(/\(|\)/g,""));    
+            uris.push(item.name);
           }
         };
         //console.log(ids);
-       console.log(titles)
+       
         $.ajax({
-          method: "GET",
+          method: "post",
           url: "/spotify/sync",
-          data: { titles: titles, artists: artists }
+          data: { uris: uris }
         })
           .done(function( msg ) {
-            location.replace("/local/display_playlists");
+            alert("Playlist was created " + msg);
           });
         });
   

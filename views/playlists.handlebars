@@ -40,9 +40,9 @@
     </div>
     
     <div class="col-md-12 col-12">
+      
       {{#if spotify_tracks}}
-
-      <form method="post" action="/spotify/save_tracks">   
+      <form>   
         <fieldset class="col-md-12 text-center">      
           <legend class="playlist-header">Tracks:</legend>
 
@@ -51,7 +51,7 @@
             <div class="row spotify-track-list">
               {{#each spotify_tracks}}
               {{> spotify_tracks-block }}
-                  {{/each}}  
+              {{/each}}  
             </div>
 
 <div class="row">
@@ -77,7 +77,7 @@
 
 
 {{#if message }}
-<form method="post" action="/spotify/save_tracks">      
+<form>      
     <fieldset>      
         <p>{{ message }}</p>  
         <br>         
@@ -112,11 +112,6 @@
 </div>
   </div>
 </div>
-
-
-{{!-- <form action="/logout" method="GET">
-        <button type=submit>Logout</button>
-</form> --}}
 
 
 {{> home/footer}}

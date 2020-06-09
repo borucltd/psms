@@ -31,20 +31,20 @@
                 <p class="playlist-details">please select which playlist best represents your current state</p>
                 <div class="container-fluid">
                   <div class="row spotify-track-list">
-                      {{#each playlists}}
-                    {{> spotify_playlists-block }}
-                  {{/each}}  
-                     {{/if}}
+                        {{#each playlists}}
+                        {{> spotify_playlists-block }}
+                        {{/each}}  
+                     
                   </div>
                 </div>    
               </fieldset>      
             </form> 
-       
+            {{/if}}
         </div>
-        <div class="col-md-12 col-12">
+      <div class="col-md-12 col-12">
+      
       {{#if spotify_tracks}}
-
-      <form method="post" action="/spotify/save_tracks">   
+      <form>   
         <fieldset class="col-md-12 text-center">      
           <legend class="playlist-header">Tracks:</legend>
 
@@ -53,21 +53,19 @@
             <div class="row spotify-track-list">
               {{#each spotify_tracks}}
               {{> spotify_tracks-block }}
-                  {{/each}}  
+              {{/each}}  
             </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button class="submitToDatabase btn-main" type="submit" value="Add tracks to the playlist">Add tracks to Playlist</button> 
+        <button class="submitToSpotify btn-main" type="submit" value="Save to your Spotify">Save Playlist to Spotify Account</button>     
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col-md-12 text-center">
-    <button class="submitToDatabase btn-main" type="submit" value="Add tracks to the playlist">Add tracks to Playlist</button> 
-    <button class="submitToSpotify btn-main" type="submit" value="Save to your Spotify">Save Playlist to Spotify Account</button>     
   </div>
-
-
-</div>
-</div>
-        </fieldset>      
-      </form>
-      {{/if}}
+  </fieldset>      
+  </form>
+  {{/if}}
         </div>
       </div>
     </div>

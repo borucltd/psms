@@ -5,6 +5,7 @@ const request = require('request')
 const axios = require('axios')
 const fs = require('fs')
 const db = require('../models')
+const moment = require('moment')
 
 // this is important
 // access_token is SPECIFIC to the scopes below
@@ -188,8 +189,10 @@ router.get('/local/display_playlists',   async (req,res) => {
         
         let obj = {
             title: element.title,
-            artist: element.artistName
+            artist: element.artistName,
+            uri: element.uri
         }
+
         tracks.push(obj)
     });
     
@@ -209,7 +212,7 @@ router.post('/spotify/save_tracks', async (req,res) => {
    
     // SQL inserts to find accessToken
     for (key in req.body.titles) {
-        let confirmation =  await db.Song.create({ title: req.body.titles[key], artistName: req.body.artists[key] })
+        let confirmation =  await db.Song.create({ title: req.body.titles[key], artistName: req.body.artists[key], uri: req.body.uris[key] })
         //alert("Songs added")
         // now we need to update another table UserSongs
         // song id confirmation.id
@@ -227,7 +230,7 @@ router.post('/spotify/save_tracks', async (req,res) => {
 
 
 // creates playlist in spotify
-router.get('/spotify/sync', async (req,res) => {
+router.post('/spotify/sync', async (req,res) => {
 
     console.log(req.query)
     const user_id = req.user.id
@@ -236,26 +239,43 @@ router.get('/spotify/sync', async (req,res) => {
     // SQL select to find accessToken
     const existingUser = await db.User.findOne({where: {spotifyId: req.user.id}})
     const access_token = existingUser.accessToken
-    // axios returns a promise
+    const uris = req.body.uris
+
+    console.log("saving to spotify");
+
+    const playlist_name = "mood" + moment().unix();
+    
+    console.log("HEEEERE" + playlist_name);
+   
+    // create playlist mood
     await axios({
         method: 'post',
         url: spotify_playlist_url,
         headers: {"Authorization": "Bearer " + access_token},
-        data: { name: "mood",
+       
+        data: { name: playlist_name,
                 public: "false"
             }
     })
-    .then(response => {
-       console.log("Adding tracks to Spotify playlist:")
-        
-
-
-
+    .then( async (response) => {
+        console.log("playlist was created")
+        // we need playlist's id PLUS uri for each track
+        const playlist_url = `https://api.spotify.com/v1/playlists/${response.data.id}/tracks`
+        // console.log(uris.join(','))
+        // add tracks to playlist
+        await axios({
+            method: 'post',
+            url: playlist_url,
+            headers: {"Authorization": "Bearer " + access_token},
+            data: { uris : uris }
+        })
+        .then(response => {
+            console.log("List created")
+            res.send(playlist_name);
+        })
+        .catch(error => console.log('Error', error.response.data))     
     })
     .catch(error => console.log('Error', error.response.data))
-
-    console.log(spotify_playlist_url)
-
 })
 
 
@@ -263,7 +283,6 @@ router.get('/spotify/sync', async (req,res) => {
 function randomizeArray(array,size) {
     
     const output_array = []
-
     if (array.length > 0 ) {
         for (i=0; i<size; i++) {
             random_index = Math.floor(Math.random()*(array.length))
@@ -272,9 +291,7 @@ function randomizeArray(array,size) {
     } else {
         throw "This is not an array"
     } 
-
     return output_array
-
 }
 
 module.exports = router
