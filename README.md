@@ -67,6 +67,9 @@ MEAMs App Landing Page: </br>
 - For the application OAuth 2.0, it is based on the following github repository:
 * [JMPerez GitHub](https://github.com/JMPerez/passport-spotify)
 
+- Music video clip from 'Closer to the edge' by 30 Seconds to Mars
+* [full music video](https://youtu.be/mLqHDhF-O28)
+
 ## Authors
 
 &copy; Copyright by Peculiar Penguins Enterprise (Mariuz, Nicole, Matthew, Astrid)
