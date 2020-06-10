@@ -1,10 +1,12 @@
 # MEAMs app (Music Evoked Autobiographical Memories)
 
-[deployed app](https://murmuring-lake-05413.herokuapp.com/)
+[deployed app](https://murmuring-lake-05413.herokuapp.com/) </br>
 [presentation slide deck](https://www.canva.com/design/DAD-q-PNPJo/2qjmANGNy_sxNbHO4pC6_A/view?utm_content=DAD-q-PNPJo&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
+
 ## Description
 
-
+Based on the popularity of journaling and scrapbooking, this app is designed for the Millennial user who lives their life through music as opposed to words or imagery. It is akin to a diary format for users, giving them the ability to document their daily experiences through playlists. It’s the modern day version of a mixtape. </br>
+Application which lets you save songs depends on your daily mood. It uses your personal Spotify account to select “mood-random” songs. The algorithm will be based on mappings pre-defined in the database.  Users will have personal playlists which they can share with other users. 
 
 ## User Flow
 
@@ -56,6 +58,11 @@ MEAMs App Landing Page: </br>
 - The following are the references for some background reseach and for how the application title are choosen:
 * [Music-Evoked Emotions—Current Studies journal article](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5705548/)
 * [Music-evoked autobiographical memories in everyday life journal article](https://journals.sagepub.com/doi/full/10.1177/0305735619888803)
+
+- Bootstrap 4 starter template files:
+* [Starter Boostrap](https://startbootstrap.com/templates/)
+* [Boostrap code snippets](https://startbootstrap.com/snippets/)
+* [Get Boostrap Official templates](https://getbootstrap.com/docs/4.4/examples/)
 
 - For the application OAuth 2.0, it is based on the following github repository:
 * [JMPerez GitHub](https://github.com/JMPerez/passport-spotify)
