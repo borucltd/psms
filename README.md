@@ -60,9 +60,9 @@ MEAMs App Landing Page: </br>
 * [Music-evoked autobiographical memories in everyday life journal article](https://journals.sagepub.com/doi/full/10.1177/0305735619888803)
 
 - Bootstrap 4 starter template files:
-* [Starter Boostrap](https://startbootstrap.com/templates/)
-* [Boostrap code snippets](https://startbootstrap.com/snippets/)
-* [Get Boostrap Official templates](https://getbootstrap.com/docs/4.4/examples/)
+* [Bootstrap landing page template](https://startbootstrap.com/themes/new-age/)
+* [Bootstrap code snippets](https://startbootstrap.com/snippets/)
+* [Get Bootstrap Official templates](https://getbootstrap.com/docs/4.4/examples/)
 
 - For the application OAuth 2.0, it is based on the following github repository:
 * [JMPerez GitHub](https://github.com/JMPerez/passport-spotify)
