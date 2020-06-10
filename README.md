@@ -31,13 +31,20 @@
 
 ## Screenshots of the app
 
-![Login Page]()
+User Login: </br>
+![Login Page](https://github.com/borucltd/psms/blob/master/public/assets/img/MEAMs-login.png)
 
-![Profile Page]()
+User Profile Page: </br>
+![Profile Page](https://github.com/borucltd/psms/blob/master/public/assets/img/MEAMs-landing.png)
 
-![Search Page]()
+Search Spotify Curated Playlists: </br>
+![Search Page](https://github.com/borucltd/psms/blob/master/public/assets/img/MEAMs-search-playlist.png)
 
-![Landing Page]()
+Saved track searches: </br>
+![User Saved tracks](https://github.com/borucltd/psms/blob/master/public/assets/img/MEAMs-user-tracks.png)
+
+MEAMs App Landing Page: </br>
+![Landing Page](https://github.com/borucltd/psms/blob/master/public/assets/img/MEAMs-splash-page.png)
 
 ## Future Developments
 
