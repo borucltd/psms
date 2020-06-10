@@ -1,0 +1,11 @@
+ 
+        <div class="col-md-3 col-sm-6 col-6">
+            <img class="track-cover" src={{ track.album.images.[0].url }}>
+            <br><span class="{{ track.id }}_title">{{ track.name }}</span>
+            <br><span class="{{ track.id }}_artist">({{ track.album.artists.[0].name }})</span> 
+            <input type="checkbox" name={{track.uri}} value={{ track.id }} class="saveToDatabase">
+        </div>
+        
+
+
+

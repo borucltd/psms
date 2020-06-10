@@ -1,0 +1,126 @@
+
+{{> home/home-nav}}
+
+<body class="bkg-col">
+
+  <!-- Page Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+        <h1 class="mt-4 playlist-header">hey, {{ user.displayName }}</h1>
+      </div>
+      <div class="col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+        <h3>ready to add tracks to the soundtrack of your life?</h3>
+      </div>
+      <div class="col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+        <h3>here are your current soundtracks.</h3>
+      </div>
+      <div class="col-md-12 col-sm-12 col-12 d-flex justify-content-center">
+        <p>click to read journal entry and play tracks.</p>
+      </div>
+    </div>
+  </div>
+{{> home/my-playlists-header}}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-12">
+          {{#if playlists}}
+            <form method="get" action="/spotify/search_tracks">      
+              <fieldset class="col-md-12 text-center">      
+                <legend class="playlist-header">Spotify Playlists:</legend> 
+                <p class="playlist-details">please select which playlist best represents your mood.</p>
+                <div class="container-fluid">
+                  <div class="row spotify-track-list">
+                        {{#each playlists}}
+                        {{> spotify_playlists-block }}
+                        {{/each}}  
+                     
+                  </div>
+                </div>    
+              </fieldset>      
+            </form> 
+            {{/if}}
+        </div>
+      <div class="col-md-12 col-12">
+      
+      {{#if spotify_tracks}}
+      <form>   
+        <fieldset class="col-md-12 text-center">      
+          <legend class="playlist-header">Tracks:</legend>
+
+            <p class="playlist-details">select your playlist tracks</p> 
+            <div class="container-fluid">
+            <div class="row spotify-track-list">
+              {{#each spotify_tracks}}
+              {{> spotify_tracks-block }}
+              {{/each}}  
+            </div>
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button class="submitToDatabase btn-main" type="submit" value="Add tracks to the playlist">Add tracks to Playlist</button> 
+        <button class="submitToSpotify btn-main" type="submit" value="Save to your Spotify">Save Playlist to Spotify Account</button>     
+      </div>
+    </div>
+
+  </div>
+  </fieldset>      
+  </form>
+  {{/if}}
+        </div>
+      </div>
+    </div>
+
+
+{{#if message }}
+<form method="post" action="/spotify/save_tracks">      
+    <fieldset>      
+        <p>{{ message }}</p>  
+        <br>         
+    </fieldset>      
+</form>
+{{/if}}
+
+{{#if localdb_tracks }}
+<form method="get" action="/spotify/sync">      
+  <fieldset class="col-md-12 text-center">      
+    <legend class="playlist-header">My tracks:</legend>  
+      <ul class="w3-ul ">
+        {{#each localdb_tracks}}
+        {{> localdb_tracks-block }}
+        {{/each}}    
+      </ul>      
+  </fieldset>        
+</form>
+{{/if}}  
+
+       
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      
+      <button class="submitToSpotify btn-main" type="submit" value="Save to your Spotify">Save Playlist to Spotify Account</button> 
+      
+      <form action="/local/display_playlists" method="GET">
+        <button class="btn-main" type=submit>My Playlists</button>
+      </form>
+      <form action="/spotify/search_playlists" method="GET">
+        <button class="btn-main" type=submit>Spotify playlists</button>
+      </form>
+</div>
+</div>
+</div>
+
+
+{{!-- <form action="/logout" method="GET">
+        <button type=submit>Logout</button>
+</form> --}}
+
+
+{{> home/footer}}
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+</body>
+
+
